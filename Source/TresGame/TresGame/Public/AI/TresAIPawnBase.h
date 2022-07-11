@@ -18,23 +18,23 @@ class UTresActionDefinitionBase;
 class UTresNpcSmartphoneCameraComponent;
 class UMercunaObstacleComponent;
 
-UCLASS(Abstract)
+UCLASS(Abstract, BlueprintType)
 class ATresAIPawnBase : public ATresCharPawnBase {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere)
     UBehaviorTree* MyAIBehavior;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     TArray<FTresBehaviorTreeInjectionData> m_DynamicAIBehavior;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     TArray<TSubclassOf<UTresActionDefinitionBase>> m_ActionDefinitions;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     TSubclassOf<UTresAttackDefinitionBase> m_DefaultAttackDefinition;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     TSubclassOf<UTresLocomotionDefinitionBase> m_DefaultLocomotionDefinition;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere)
@@ -58,54 +58,54 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere)
     FGameplayTag m_AttackGroup;
     
-    UPROPERTY(EditInstanceOnly)
+    UPROPERTY(EditInstanceOnly, BlueprintReadWrite)
     bool bDebugDisplay;
     
-    UPROPERTY(Transient)
+    UPROPERTY(Transient, BlueprintReadWrite, EditAnywhere)
     bool m_Reincarnation;
     
     UPROPERTY(AdvancedDisplay, BlueprintReadWrite, EditAnywhere)
     bool m_bBPEM_IgnoreStatus;
     
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(Transient, BlueprintReadWrite, EditAnywhere)
     TSubclassOf<UTresLocomotionDefinitionBase> m_LocomotionDefinition;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere)
     float m_AIBodyCollisionRadius;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     int32 m_MaxShieldHp;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     float m_TurnLimitPitch;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     float m_FixedPointTurnSpeed;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     bool m_bUseIdleMaxRotationSpeed;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     float m_IdleMaxRotationSpeed;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     bool m_bUseFixedTurnMaxRotationSpeed;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     float m_FixedTurnMaxRotationSpeed;
     
-    UPROPERTY(BlueprintReadWrite, Export)
+    UPROPERTY(BlueprintReadWrite, Export, EditAnywhere)
     TWeakObjectPtr<UTresNpcSmartphoneCameraComponent> m_SmartphoneCameraComponentRef;
     
 private:
-    UPROPERTY(Export, VisibleDefaultsOnly)
+    UPROPERTY(Export, EditDefaultsOnly, BlueprintReadWrite, meta=(AllowPrivateAccess="true"))
     UMercunaNavigationComponent* m_Navigation3DComponent;
     
-    UPROPERTY(VisibleDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta=(AllowPrivateAccess="true"))
     bool m_bManualEditingObstacleComponent;
     
-    UPROPERTY(EditAnywhere, Export)
+    UPROPERTY(EditAnywhere, Export, BlueprintReadWrite, meta=(AllowPrivateAccess="true"))
     UMercunaObstacleComponent* ObstacleComponent;
     
 public:
@@ -139,7 +139,7 @@ public:
     UFUNCTION(BlueprintPure)
     bool IsPlayFieldVoice();
     
-    UFUNCTION(Exec)
+    UFUNCTION(Exec, BlueprintPure)
     bool IsNavigationBuildInProgress() const;
     
     UFUNCTION(BlueprintPure)

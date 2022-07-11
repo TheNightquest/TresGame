@@ -51,7 +51,7 @@ class AActor;
 class USQEX_KBD_Component;
 class UAnimSequenceBase;
 
-UCLASS(Abstract)
+UCLASS(Abstract, BlueprintType)
 class TRESGAME_API ATresCharPawnBase : public ATresPawnBase, public IGenericTeamAgentInterface, public IAISightTargetInterface {
     GENERATED_BODY()
 public:
@@ -61,35 +61,35 @@ public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FTresAnimNotifyEndBpEvent, FName, AnimSeqName, TEnumAsByte<ETresAnimNotifyBpEventID>, EventID, int32, Param);
     
 private:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UTresCharMovementComponent* MyMovement;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UTresSkeletalMeshComponent* MyMesh;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UTresAtkCollComponent* MyAtkColl;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UTresBodyCollComponent* MyBodyColl;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UTresEquipmentComponent* MyEquipment;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UTresStateQueueComponent* MyStateComp;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UTresEffectAttachComponent* MyEffectAtt;
     
 protected:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite)
     FVector BaseTranslationOffset;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite)
     uint32 bPressedJump: 1;
     
-    UPROPERTY(BlueprintReadOnly, Transient, VisibleInstanceOnly)
+    UPROPERTY(BlueprintReadWrite, Transient, VisibleInstanceOnly)
     float JumpKeyHoldTime;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere)
@@ -100,7 +100,7 @@ public:
     FTresCharMovementUpdatedSignature OnCharacterMovementUpdated;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
     ETresChrUniqueID m_ChrUniqueID;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere)
@@ -109,16 +109,16 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere)
     int32 MaxHitPoint;
     
-    UPROPERTY(SaveGame)
+    UPROPERTY(SaveGame, BlueprintReadWrite)
     int32 m_HitPoint;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere)
     int32 MaxMagicPoint;
     
-    UPROPERTY(SaveGame)
+    UPROPERTY(SaveGame, BlueprintReadWrite)
     int32 m_MagicPoint;
     
-    UPROPERTY(SaveGame)
+    UPROPERTY(SaveGame, BlueprintReadWrite)
     uint32 m_bAppearMsgSended: 1;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere)
@@ -127,33 +127,33 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere)
     int32 MaxFocusPoint;
     
-    UPROPERTY(SaveGame)
+    UPROPERTY(SaveGame, BlueprintReadWrite)
     int32 m_FocusPoint;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere)
     ETresBodyCollReactionType m_DefaultBodyCollReactionType;
     
 public:
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
     uint32 m_bEnableAttractionFlowHitPoint: 1;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
     uint32 m_bEnableAttractionFlowMarkerProc: 1;
     
 protected:
-    UPROPERTY(SaveGame)
+    UPROPERTY(SaveGame, BlueprintReadWrite)
     int32 m_AttractionHP;
     
-    UPROPERTY(SaveGame)
+    UPROPERTY(SaveGame, BlueprintReadWrite)
     TEnumAsByte<ETresCommandKind> m_AttractionMarkerCommandID;
     
-    UPROPERTY(SaveGame)
+    UPROPERTY(SaveGame, BlueprintReadWrite)
     float m_AttractionMarkerRestTime;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
     uint32 m_bRootTransCalcRootSpace: 1;
     
-    UPROPERTY(BlueprintReadOnly, Transient, VisibleInstanceOnly)
+    UPROPERTY(BlueprintReadWrite, Transient, VisibleInstanceOnly)
     uint32 bIsBattleMode: 1;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere)
@@ -174,10 +174,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere)
     uint32 m_bIsNeedAttachAttackHitEffect: 1;
     
-    UPROPERTY(AdvancedDisplay, BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(AdvancedDisplay, BlueprintReadWrite, EditDefaultsOnly)
     uint32 m_bDisableInvincibleInCinematicMode: 1;
     
-    UPROPERTY(Transient)
+    UPROPERTY(Transient, BlueprintReadWrite)
     float m_ControlAnalogInputModifier;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere)
@@ -192,46 +192,46 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere)
     FVector m_DangleOffsetPos;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
     uint32 m_bEquipmentAutoSpawn: 1;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(Export, Transient, BlueprintReadWrite)
     UTresPoleComponent* m_LastHitPoleComponent;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(Export, Transient, BlueprintReadWrite)
     UTresHopComponent* m_LastHitHopComponent;
     
-    UPROPERTY(BlueprintReadOnly, Transient, VisibleInstanceOnly)
+    UPROPERTY(BlueprintReadWrite, Transient, VisibleInstanceOnly)
     float m_NoActionCounter;
     
-    UPROPERTY(Transient)
+    UPROPERTY(Transient, BlueprintReadWrite)
     UParticleSystem* m_LastWaterOuterEffect;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
     uint32 m_bCameraLookPosToMesh: 1;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
     UTresUIDataAssetStatus* m_pUIDataStatus;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     uint32 MySkelCtrl_IkDisableFlag: 1;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     float MySkelCtrl_IkInitValue;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     uint32 m_bApplyWetnessMaterial: 1;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     uint32 m_bApplyOceanWetnessMaterial: 1;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     float m_ApplyOceanWetnessMaterialMinHeight;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     float m_ApplyOceanWetnessMaterialMaxHeight;
     
-    UPROPERTY(Transient)
+    UPROPERTY(Transient, BlueprintReadWrite)
     ATresAdhereObjBase* m_pBadStatAdhereActor;
     
 public:
@@ -239,40 +239,40 @@ public:
     FTresCharTakeDamageSignature OnTresTakeDamage;
     
 protected:
-    UPROPERTY(DuplicateTransient, Export, Transient)
+    UPROPERTY(DuplicateTransient, Export, Transient, BlueprintReadWrite)
     UTresLockonTargetComponent* m_FlowTarget;
     
-    UPROPERTY(DuplicateTransient, Export, Transient)
+    UPROPERTY(DuplicateTransient, Export, Transient, BlueprintReadWrite)
     UTresAttractionFlowMarkerComponent* m_AttractionFlowMarker;
     
-    UPROPERTY(DuplicateTransient, Export, Transient)
+    UPROPERTY(DuplicateTransient, Export, Transient, BlueprintReadWrite)
     UTresSwimRingComponent* m_pSwimRing;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere)
     TEnumAsByte<ETresTeam::Type> MyTeam;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
     USQEX_ParticleAttachDataAsset* m_CmnAuraEffect;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
     USQEX_ParticleAttachDataAsset* m_CmnMagicCastEffect;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
     USQEX_ParticleAttachDataAsset* m_CmnBadStatesEffect;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
     USQEX_ParticleAttachDataAsset* m_CmnAppearEffect;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
     uint32 m_bEnableRegistFootStepEffectGen: 1;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
     uint32 m_bEnableWaterRippleEffect: 1;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
     FName m_RippleBaseBoneName;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
     float m_RippleLocationShiftScale;
     
 public:
@@ -295,10 +295,10 @@ public:
     USQEXSEADSoundReferenceEnumSet* m_AutoSeAssets;
     
 protected:
-    UPROPERTY(Export, Transient)
+    UPROPERTY(Export, Transient, BlueprintReadWrite)
     USQEXSEADAutoSeComponent* MyAutoSe;
     
-    UPROPERTY(Transient)
+    UPROPERTY(Transient, BlueprintReadWrite)
     USQEXSEADAutoSeComponentCallbackDefault* MyAutoSeCallback;
     
 public:
@@ -390,7 +390,7 @@ public:
     UFUNCTION(BlueprintCallable)
     void RequestDirectMove(FVector refVelocity, bool bForceMaxSpeed);
     
-    UFUNCTION(BlueprintAuthorityOnly, BlueprintImplementableEvent)
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintImplementableEvent, BlueprintCallable)
     void ReceiveTresTakeDamage(float DamagePoint, AController* InstigatedBy, const FHitResult& HitInfo, const FTresDamageInfo& DamageInfo, FVector ShotFromDirection, AActor* DamageCauser);
     
     UFUNCTION(BlueprintImplementableEvent)

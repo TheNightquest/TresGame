@@ -21,47 +21,47 @@ UCLASS(BlueprintType)
 class TRESGAME_API ATresEnemyPawnBase : public ATresAIPawnBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(Transient, BlueprintReadWrite, EditAnywhere)
     ATresEnemyPawnBase* EnemyParent;
     
-    UPROPERTY(Transient)
+    UPROPERTY(Transient, BlueprintReadWrite, EditAnywhere)
     TArray<ATresEnemyPawnBase*> EnemyChildren;
     
 protected:
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
     ETresEnemyUniqueID m_EnemyUniqueID;
     
-    UPROPERTY(AdvancedDisplay, EditAnywhere)
+    UPROPERTY(AdvancedDisplay, EditAnywhere, BlueprintReadWrite)
     ESQEX_FreeFlowKind m_FreeFlowKind;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
     int32 m_AppearEffectGroupID;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
     int32 m_DieEffectGroupID;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     TArray<float> m_IdlingBreakWeights;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
     TSubclassOf<UTresEnemyCommonParam> m_EnemyCommonParam;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
     TArray<FRevengeAttacks> m_RevengeAttacks;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
     TArray<TSubclassOf<ATresEnemyPawnBase>> m_SpawnEnemyClasses;
     
-    UPROPERTY(EditDefaultsOnly)
-    uint8 m_bEnableDieBodyPush: 1;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+    uint32 m_bEnableDieBodyPush: 1;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
     TEnumAsByte<ETresEnemyMajorUseID> m_eMajorUseID;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
     TArray<FTresEnemyRetryVoiceData> m_RetryVoiceDataList;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
     USoundBase* m_PlayerKilledVoiceData;
     
 public:
@@ -69,30 +69,30 @@ public:
     USQEXSEADSoundReferenceEnumSet* m_SoundAssets_Damage;
     
 private:
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta=(AllowPrivateAccess="true"))
     bool m_bStuckCheck;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta=(AllowPrivateAccess="true"))
     bool m_bFallenAbyssCheck;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta=(AllowPrivateAccess="true"))
     bool m_bRePopForStuckAndFallenAbyssCheck;
     
 protected:
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta=(AllowPrivateAccess="true"))
     bool m_bWaterEnemy;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(Export, Transient, BlueprintReadWrite, meta=(AllowPrivateAccess="true"))
     UTresAIWeaponComponent* m_AIWeaponComponent;
     
-    UPROPERTY(Export)
+    UPROPERTY(Export, BlueprintReadWrite, meta=(AllowPrivateAccess="true"))
     UParticleSystemComponent* m_SwirlUpEff;
     
 public:
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta=(AllowPrivateAccess="true"))
     float m_YoBindMeshScaleRate;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta=(AllowPrivateAccess="true"))
     float m_WallHitIgnorePhysicsObjectMass;
     
     ATresEnemyPawnBase();
@@ -102,10 +102,10 @@ public:
     UFUNCTION(BlueprintPure)
     bool IsWeaponAttacking() const;
     
-    UFUNCTION()
+    UFUNCTION(BlueprintCallable)
     bool IsTargetPlayer() const;
     
-    UFUNCTION()
+    UFUNCTION(BlueprintCallable)
     bool IsTargetGigas() const;
     
     UFUNCTION(BlueprintPure)

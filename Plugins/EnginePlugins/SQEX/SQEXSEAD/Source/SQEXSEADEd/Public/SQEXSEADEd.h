@@ -1,13 +1,13 @@
-// Copyright 1998-2017 Epic Games, Inc. All Rights Reserved.
 #pragma once
-#include "CoreMinimal.h"
-#include "UObject/Object.h"
-#include "SQEXSEADEd.generated.h"
 
-UCLASS()
-class USQEXSEADEd : public UObject
+#include "CoreMinimal.h"
+#include "ModuleManager.h"
+
+class FSQEXSEADEdModule : public IModuleInterface
 {
-	GENERATED_BODY()
 public:
-	USQEXSEADEd();
+
+	/** IModuleInterface implementation */
+	virtual void StartupModule() override;
+	virtual void ShutdownModule() override;
 };
