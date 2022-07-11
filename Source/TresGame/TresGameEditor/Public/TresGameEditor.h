@@ -6,6 +6,7 @@
 #include "AssetTypeActions_Base.h"
 #include "AssetTypeCategories.h"
 #include "ModuleManager.h"
+#include "TresGameEditorMode.h"
 #include "TresGameEditor_Factory.h"
 
 

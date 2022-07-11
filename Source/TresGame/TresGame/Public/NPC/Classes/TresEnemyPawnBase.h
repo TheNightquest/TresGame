@@ -17,7 +17,7 @@ class USQEXSEADSoundReferenceEnumSet;
 class UTresAIWeaponComponent;
 class UObject;
 
-UCLASS()
+UCLASS(BlueprintType)
 class TRESGAME_API ATresEnemyPawnBase : public ATresAIPawnBase {
     GENERATED_BODY()
 public:
