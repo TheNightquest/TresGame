@@ -18,6 +18,7 @@ public class TresGameEditorTarget : TargetRules {
 			"SQEXSEADEd",
 			"TresGame",
 			"TresGameEditor",
+			
 		});
 	}
 }
